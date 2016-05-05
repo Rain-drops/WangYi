@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@color/navigationTitle2"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="7">
+
+            <ImageView
+                android:id="@+id/iv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/logo" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            >
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/ic_main_menu_search" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="16dp">
+
+            <ImageView
+                android:id="@+id/iv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="2dp"
+                android:src="@drawable/night_biz_pc_main_money_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_money"
+                android:padding="2dp"
+                android:text="+5/40"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/hsv_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:scrollbars="none"
+        android:background="@android:color/white"
+        android:layout_below="@id/ll_title">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <LinearLayout
+                android:id="@+id/hsv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                ></LinearLayout>
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="100dp"
+                android:layout_height="4dp"
+                android:background="#33b5e5"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_news"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/hsv_view">
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

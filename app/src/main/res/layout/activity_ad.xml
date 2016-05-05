@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <FrameLayout android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="83.0">
+
+        <TextView android:textSize="16.0sp"
+            android:textColor="#ffffffff"
+            android:gravity="center"
+            android:layout_gravity="top|right|center"
+            android:id="@+id/biz_ad_gomain"
+            android:background="@drawable/biz_ad_go_main"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:text="111" />
+    </FrameLayout>
+    <LinearLayout android:gravity="left|center"
+        android:orientation="vertical"
+        android:id="@+id/biz_ad_copyright_container"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_weight="17.0">
+        <ImageView android:gravity="center"
+            android:id="@+id/biz_ad_img_slogan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/biz_ad_slogan" />
+
+        <TextView
+            android:id="@+id/biz_ad_txt_copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/copyright" />
+
+    </LinearLayout>
+
+</LinearLayout>
