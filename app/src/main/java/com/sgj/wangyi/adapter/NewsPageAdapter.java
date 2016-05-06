@@ -3,88 +3,93 @@ package com.sgj.wangyi.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.sgj.wangyi.BaseApplication;
+import com.sgj.wangyi.R;
 import com.sgj.wangyi.fragment.FragmentTest;
+import com.sgj.wangyi.fragment.FragmentTest2;
+import com.sgj.wangyi.model.NewsTouTiaoModel;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by John on 2016/5/5.
  */
-public class NewsPageAdapter extends FragmentPagerAdapter {
+public class NewsPageAdapter extends FragmentStatePagerAdapter {
 
     private static final String TAG = "NewsPageAdapter";
 
-    public NewsPageAdapter(FragmentManager fm) {
+    List<NewsTouTiaoModel> mNewsTouTiaoList;
+    List<Fragment> mFragments = new ArrayList<Fragment>();
+
+    public NewsPageAdapter(FragmentManager fm,  String[] titles) {
         super(fm);
+        this.titles = titles;
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:
-                return new FragmentTest();
-            case 1:
-                return new FragmentTest();
-            case 2:
-                return new FragmentTest();
-            case 3:
-                return new FragmentTest();
-            case 4:
-                return new FragmentTest();
-            case 5:
-                return new FragmentTest();
-            case 6:
-                return new FragmentTest();
-            case 7:
-                return new FragmentTest();
-            case 8:
-                return new FragmentTest();
-            case 9:
-                return new FragmentTest();
-            case 10:
-                return new FragmentTest();
-            case 11:
-                return new FragmentTest();
-            default:
-                break;
+
+        if(position%2 == 0){
+            return FragmentTest.newInstance(new NewsTouTiaoModel());
+        }else {
+            return FragmentTest2.newInstance(new NewsTouTiaoModel());
         }
-        return new FragmentTest();
+
+//        switch (position){
+//            case 0:
+//                return FragmentTest.newInstance(new NewsTouTiaoModel());
+//            case 1:
+//                return FragmentTest.newInstance(new NewsTouTiaoModel());
+//            case 2:
+//                return FragmentTest.newInstance(new NewsTouTiaoModel());
+//        }
+//        return FragmentTest.newInstance(new NewsTouTiaoModel());
     }
 
     @Override
     public int getCount() {
-        return 11;
+        return titles.length;
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Fragment fragment=null;
+        try {
+            fragment=(Fragment)super.instantiateItem(container,position);
+        }catch (Exception e){
+
+        }
+        return fragment;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 0:
-                return " 1 ";
-            case 1:
-                return " 2 ";
-            case 2:
-                return " 3 ";
-            case 3:
-                return " 4 ";
-            case 4:
-                return " 5 ";
-            case 5:
-                return " 6 ";
-            case 6:
-                return "7";
-            case 7:
-                return "8";
-            case 8:
-                return "9";
-            case 9:
-                return "10";
-            case 10:
-                return "11";
-            case 11:
-                return "12";
-            default:
-                break;
-        }
-        return "0";
+
+        return titles[position];
+    }
+
+    private String[] titles;
+    private LayoutInflater mInflater;
+
+    /**
+     * 添加getTabView的方法，来进行自定义Tab的布局View
+     * @param position
+     * @return
+     */
+    public View getTabView(int position){
+        mInflater=LayoutInflater.from(BaseApplication.getInstance());
+        View view=mInflater.inflate(R.layout.news_tab_item_layout,null);
+        TextView tv= (TextView) view.findViewById(R.id.textView);
+        tv.setText(titles[position]);
+        return view;
     }
 }

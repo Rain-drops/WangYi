@@ -13,17 +13,17 @@ import com.sgj.wangyi.model.NewsTouTiaoModel;
 /**
  * Created by John on 2016/5/5.
  */
-public class FragmentTest extends Fragment {
+public class FragmentTest2 extends Fragment {
 
-    public static FragmentTest newInstance(NewsTouTiaoModel model){
-        FragmentTest fragmentTest = new FragmentTest();
+    public static FragmentTest2 newInstance(NewsTouTiaoModel model){
+        FragmentTest2 fragmentTest = new FragmentTest2();
         return fragmentTest;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_test1, container, false);
+        View view = inflater.inflate(R.layout.fragment_test2, container, false);
         return view;
     }
 }
