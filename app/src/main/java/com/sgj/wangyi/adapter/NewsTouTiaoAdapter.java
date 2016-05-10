@@ -47,11 +47,27 @@ public class NewsTouTiaoAdapter extends RecyclerView.Adapter<NewsTouTiaoAdapter.
         if(model.imgsrc != null){
             Glide.with(mContext).load(model.imgsrc).centerCrop().into(holder.iv_cover);
         }
+        if(model.title != null){
+            holder.tv_title.setText(model.title);
+        }
+        if(model.tags != null){
+            holder.tv_tname.setText(model.tags);
+        }else if(model.source != null){
+            holder.tv_tname.setText(model.source);
+        }
+        if(model.replyCount != null){
+            holder.tv_reply_count.setText(model.replyCount + "跟帖");
+        }
     }
 
     @Override
     public int getItemCount() {
         return mDatas.size();
+    }
+
+    public void updateData(ArrayList<TouTiaoModel.TouTiao> mDataSet) {
+        this.mDatas = mDataSet;
+        this.notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

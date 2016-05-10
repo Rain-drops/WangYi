@@ -5,8 +5,8 @@ package com.sgj.wangyi.url;
  */
 public class HttpUrl {
 
-    //    头条
-    public static final String TOUTIAO_URL  = "http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html";
+    //    头条{0-20/0-40/0-60/0-100/0-140/}
+    public static final String TOUTIAO_URL  = "http://c.m.163.com/nc/article/headline/T1348647853363/0-";
     //    娱乐
     public static final String YULE_URL  = "http://c.m.163.com/nc/article/list/T1348648517839/0-20.html";
     //    体育

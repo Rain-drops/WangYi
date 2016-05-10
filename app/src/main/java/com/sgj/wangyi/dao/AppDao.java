@@ -26,8 +26,8 @@ public class AppDao {
      * 获取
      * @param listener
      */
-    public void getAllTouTiao(CallBackListener<TouTiaoModel> listener)
+    public void getAllTouTiao(CallBackListener<TouTiaoModel> listener, int pages)
     {
-        Http.post(HttpUrl.TOUTIAO_URL, null, listener);
+        Http.post(HttpUrl.TOUTIAO_URL + pages + ".html", null, listener);
     }
 }

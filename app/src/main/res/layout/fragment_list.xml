@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<com.sgj.wangyi.materialrefreshlibrery.MaterialRefreshLayout
+    android:id="@+id/refreshlayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:isLoadMore="true"
+    app:overlay="true"
+    app:progress_colors="@array/material_colors"
+    app:wave_color="#00ffffff"
+    app:wave_show="true"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -10,4 +19,4 @@
 
     </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+</com.sgj.wangyi.materialrefreshlibrery.MaterialRefreshLayout>

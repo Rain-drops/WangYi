@@ -28,8 +28,8 @@ dependencies {
     compile project(':http')
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
     compile('com.github.ozodrukh:CircularReveal:1.1.1@aar') {
         transitive = true;
     }
+    compile project(':materialrefreshlibrery')
 }

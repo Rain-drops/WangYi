@@ -42,11 +42,11 @@ public class TouTiaoModel {
         public String postid;
         public String url_3w;
         public String votecount;
-        public String replyCount;
+        public String replyCount; // 跟帖人数?
         public String skipID;
         public String ltitle;
         public String digest;
-        public String skipType;
+        public String skipType; // special：专题； photoset：照片组；
         public String url;
         public String specialID;
         public String docid;
@@ -68,6 +68,7 @@ public class TouTiaoModel {
         public String template;
         public String alias;
         public String cid;
+        public String tags;
 
         public String ename;// iconnews
         public String tname;// 头条

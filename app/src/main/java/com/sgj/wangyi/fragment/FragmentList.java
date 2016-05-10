@@ -14,6 +14,8 @@ import com.sgj.wangyi.R;
 import com.sgj.wangyi.adapter.NewsTouTiaoAdapter;
 import com.sgj.wangyi.dao.AppDao;
 import com.sgj.wangyi.listener.CallBackListener;
+import com.sgj.wangyi.materialrefreshlibrery.MaterialRefreshLayout;
+import com.sgj.wangyi.materialrefreshlibrery.MaterialRefreshListener;
 import com.sgj.wangyi.model.NewsTouTiaoModel;
 import com.sgj.wangyi.model.TouTiaoModel;
 
@@ -32,6 +34,12 @@ public class FragmentList extends Fragment {
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @Bind(R.id.refreshlayout)
+    MaterialRefreshLayout mMaterialRefreshLayout;
+
+    NewsTouTiaoAdapter mAdapter;
+    ArrayList<TouTiaoModel.TouTiao> mDataSet;
 
     public static FragmentList newInsance(){
         FragmentList fragmentList = new FragmentList();
@@ -53,6 +61,46 @@ public class FragmentList extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mMaterialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                materialRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getData();
+                    }
+                }, 1000);
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                super.onRefreshLoadMore(materialRefreshLayout);
+                handRefreshMore(materialRefreshLayout);
+            }
+
+            @Override
+            public void onfinish() {
+                super.onfinish();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mAdapter != null){
+            mAdapter.updateData(mDataSet);
+        }
+        if(mMaterialRefreshLayout != null){
+            mMaterialRefreshLayout.finishRefresh();
+        }
+    }
+
+    private void handRefreshMore(MaterialRefreshLayout refreshLayout) {
+//        mAdapter.updateData(mDataSet);
+
+        mMaterialRefreshLayout.finishRefresh();
+        mMaterialRefreshLayout.finishRefreshLoadMore();
     }
 
     @Override
@@ -69,7 +117,8 @@ public class FragmentList extends Fragment {
             @Override
             public void onError(Exception e) {
                 super.onError(e);
-                Log.e(TAG, e+"");
+                Log.e(TAG, e + "");
+                mMaterialRefreshLayout.finishRefresh();
             }
 
             @Override
@@ -78,15 +127,24 @@ public class FragmentList extends Fragment {
                 Log.e(TAG, "onSuccess() : " + result.toString());
                 if(result != null){
                     ArrayList<TouTiaoModel.TouTiao> list = result.T1348647853363;
-                    NewsTouTiaoAdapter newsTouTiaoAdapter = new NewsTouTiaoAdapter(getActivity(), list);
-                    recyclerView.setAdapter(newsTouTiaoAdapter);
+                    mDataSet = list;
+                    if(mAdapter == null){
+
+                        mAdapter = new NewsTouTiaoAdapter(getActivity(), list);
+                        recyclerView.setAdapter(mAdapter);
+                    }else {
+                        mAdapter.updateData(mDataSet);
+                    }
+                    mMaterialRefreshLayout.finishRefresh();
                 }
             }
 
             @Override
             public void onStringResult(String result) {
                 super.onStringResult(result);
+
             }
-        });
+        }, pages +=20);
     }
+    int pages = 20;
 }
