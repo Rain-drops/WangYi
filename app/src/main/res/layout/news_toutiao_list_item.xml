@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:src="@drawable/biz_about_netease"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="习近平"
+            android:layout_toRightOf="@id/iv_cover"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/base_list_title_style"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:lines="2"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_below="@id/tv_title"
+            android:paddingLeft="5dp"
+            android:paddingBottom="10dp"
+            android:gravity="bottom"
+            android:layout_alignBottom="@id/iv_cover"
+            >
+            <TextView
+                android:id="@+id/tv_tname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新闻热点"/>
+
+            <TextView
+                android:id="@+id/tv_reply_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="111跟帖"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

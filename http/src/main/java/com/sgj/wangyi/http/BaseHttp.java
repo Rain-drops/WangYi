@@ -2,6 +2,7 @@ package com.sgj.wangyi.http;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -92,11 +93,23 @@ public class BaseHttp<T> {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Class<T> clazz = GenericsUtils.getSuperClassGenricType(listener.getClass());
-                        if(clazz == String.class){
-                            if(isListenerNotNull(listener)){
-                                listener.onSuccess(mGson.fromJson(result, clazz));
+                        try{
+                            Class<T> clazz = GenericsUtils.getSuperClassGenricType(listener.getClass());
+                            if(clazz == String.class){
+                                if(isListenerNotNull(listener)){
+                                    Log.e(TAG, result + "");
+                                    listener.onSuccess((T)result);
+
+                                }
+                            }else {
+                                if(isListenerNotNull(listener)){
+                                    Log.e(TAG, result + "");
+                                    listener.onSuccess(mGson.fromJson(result, clazz));
+
+                                }
                             }
+                        }catch (Exception e){
+                            Log.e(TAG, e + "");
                         }
                     }
                 });

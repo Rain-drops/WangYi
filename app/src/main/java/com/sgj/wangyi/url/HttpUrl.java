@@ -3,7 +3,7 @@ package com.sgj.wangyi.url;
 /**
  * Created by John on 2016/4/20.
  */
-public class Urls {
+public class HttpUrl {
 
     //    头条
     public static final String TOUTIAO_URL  = "http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html";

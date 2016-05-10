@@ -27,4 +27,14 @@
 
     </style>
 
+    <style name="base_list_title_style">
+        <!-- Customize your theme here. -->
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">22sp</item>
+
+
+
+    </style>
+
 </resources>

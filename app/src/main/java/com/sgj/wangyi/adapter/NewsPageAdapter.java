@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.sgj.wangyi.BaseApplication;
 import com.sgj.wangyi.R;
+import com.sgj.wangyi.fragment.FragmentList;
 import com.sgj.wangyi.fragment.FragmentTest;
 import com.sgj.wangyi.fragment.FragmentTest2;
 import com.sgj.wangyi.model.NewsTouTiaoModel;
@@ -37,6 +38,10 @@ public class NewsPageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+
+        if(position == 0){
+            return FragmentList.newInsance();
+        }
 
         if(position%2 == 0){
             return FragmentTest.newInstance(new NewsTouTiaoModel());
