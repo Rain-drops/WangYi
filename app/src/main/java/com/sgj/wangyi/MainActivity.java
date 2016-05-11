@@ -28,35 +28,95 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.sgj.wangyi.fragment.DetailFragment;
+import com.sgj.wangyi.fragment.FragmentMine;
 import com.sgj.wangyi.fragment.FragmentNews;
 
 import java.util.ArrayList;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     //定义数组来存放Fragment界面
     private Class mFragmentArray[] = {FragmentNews.class,FragmentNews.class,FragmentNews.class,FragmentNews.class,FragmentNews.class};
 
+    private String hideTag;
+    public static final String MINE_TAG = "mine_tag";
+    public static final String NEWS_TAG = "news_tag";
+
+
+    FragmentManager mFragmentManager ;
+    FragmentTransaction mTransaction;
+
+    @Bind(R.id.ll_mine)
+    LinearLayout ll_mine;
+    @Bind(R.id.ll_news)
+    LinearLayout ll_news;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         init();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
     private void init() {
 
-        FragmentManager mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction mTransaction = mFragmentManager.beginTransaction();
-        mTransaction.add(R.id.fl_main_content, FragmentNews.newInstance());
-        mTransaction.commit();
+        ll_mine.setOnClickListener(this);
+        ll_news.setOnClickListener(this);
+
+
+
+        switchFragment(FragmentNews.newInstance(), NEWS_TAG);
+
     }
 
 
     @Override
     public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.ll_mine:
+                switchFragment(FragmentMine.newInstance(), MINE_TAG);
+                break;
+            case R.id.ll_news:
+                switchFragment(FragmentNews.newInstance(), NEWS_TAG);
+        }
+    }
+
+    private void switchFragment(Fragment fragment, String tag){
+
+        if(hideTag == tag){
+            return;
+        }
+
+        mFragmentManager = getSupportFragmentManager();
+        mTransaction = mFragmentManager.beginTransaction();
+        Fragment tagFragment = mFragmentManager.findFragmentByTag(tag);
+        if(tagFragment == null){
+            mTransaction.add(R.id.fl_main_content, fragment, tag);
+        }else {
+            mTransaction.show(tagFragment);
+        }
+
+        tagFragment = mFragmentManager.findFragmentByTag(hideTag);
+        if(tagFragment != null){
+            mTransaction.hide(tagFragment);
+        }
+
+        hideTag = tag;
+
+        mTransaction.commit();
+
 
     }
 }

@@ -5,6 +5,7 @@
     android:orientation="horizontal">
 
     <LinearLayout
+        android:id="@+id/ll_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -81,6 +82,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_mine"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
