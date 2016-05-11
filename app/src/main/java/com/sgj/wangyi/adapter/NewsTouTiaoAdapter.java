@@ -29,6 +29,10 @@ public class NewsTouTiaoAdapter extends RecyclerView.Adapter<NewsTouTiaoAdapter.
     private Context mContext;
     private ArrayList<TouTiaoModel.TouTiao> mDatas;
 
+    public static final int VALUE_TIME_TIP = 0;// 7种不同的布局
+    public static final int VALUE_LEFT_TEXT = 1;
+    public static final int VALUE_LEFT_IMAGE = 2;
+
     public NewsTouTiaoAdapter(Context mContext, ArrayList<TouTiaoModel.TouTiao> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
@@ -68,6 +72,11 @@ public class NewsTouTiaoAdapter extends RecyclerView.Adapter<NewsTouTiaoAdapter.
     public void updateData(ArrayList<TouTiaoModel.TouTiao> mDataSet) {
         this.mDatas = mDataSet;
         this.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
