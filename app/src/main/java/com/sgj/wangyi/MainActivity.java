@@ -1,5 +1,6 @@
 package com.sgj.wangyi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -61,6 +62,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment f = mFragmentManager.findFragmentByTag(MINE_TAG);
+        /*然后在碎片中调用重写的onActivityResult方法*/
+        f.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

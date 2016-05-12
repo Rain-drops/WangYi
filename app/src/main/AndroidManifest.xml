@@ -3,6 +3,7 @@
     package="com.sgj.wangyi">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,14 @@
         </activity>
 
         <activity android:name=".MainActivity"/>
+
+        <activity android:name=".CropActivity">
+            <intent-filter>
+                <action android:name="com.sgj.wangyi.CropActivity"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.sgj.wangyi.imagecrop.CropImageActivity" />
     </application>
 
 </manifest>
