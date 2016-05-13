@@ -66,23 +66,38 @@
                 android:textColor="@color/colorWhite" />
         </RelativeLayout>
     </LinearLayout>
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabs"
+    <RelativeLayout
+        android:id="@+id/rl"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/ll_title"
-        android:tag="sticky"
-        app:tabIndicatorColor="@color/navigationTitle2"
-        app:tabSelectedTextColor="@color/navigationTitle2">
+        android:layout_height="35dp"
+        android:layout_below="@id/ll_title">
 
-    </android.support.design.widget.TabLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="sticky"
+            app:tabIndicatorColor="@color/navigationTitle2"
+            app:tabSelectedTextColor="@color/navigationTitle2"
+            android:layout_toLeftOf="@+id/iv_region">
+        </android.support.design.widget.TabLayout>
+
+        <ImageView
+            android:id="@+id/iv_region"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/main_region_indicator_more"
+            android:layout_centerInParent="true"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"/>
+    </RelativeLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabs">
+        android:layout_below="@id/rl">
 
     </android.support.v4.view.ViewPager>
 

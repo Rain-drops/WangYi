@@ -24,8 +24,14 @@ import java.util.ArrayList;
  "imgextra":[{"imgsrc":"http://img5.cache.netease.com/3g/2016/5/4/201605040811061a9d2.jpg"},
  {"imgsrc":"http://img5.cache.netease.com/3g/2016/5/4/2016050408110830272.jpg"}],
  "source":"网易综合", "ename":"iosnews", "tname":"头条", "imgsrc":"http://img6.cache.netease.com/3g/2016/5/4/201605040811032410c.jpg",
- "ptime":"2016-05-04 08:09:06"}]}
- *
+ "ptime":"2016-05-04 08:09:06"},
+ *{"postid
+ ":"BM5VVFKM00014PRF","url_3w":"http://news.163.com/16/0503/21/BM5VVFKM00014PRF.html","votecount":8919,"replyCount":9984,"skipID":"S1451880983492",
+ "ltitle":"习近平：携手打造牢不可破的中老命运共同体","digest":"维护好中老关系发展的强劲势头，拓展合作的广度和深度。","skipType":"special",
+ "url":"http://3g.163.com/news/16/0503/21/BM5VVFKM00014PRF.html","specialID":"S1451880983492","docid":"BM5VVFKM00014PRF",
+ "title":"习近平同老挝总书记本扬会谈","source":"央视$","priority":230,"lmodify":"2016-05-04 09:40:05","boardid":"news_guonei8_bbs",
+ "subtitle":"","imgsrc":"http://img6.cache.netease.com/3g/2016/5/3/2016050322433116843.jpg","ptime":"2016-05-03 21:05:52"}]}
+
  */
 
 public class TouTiaoModel {

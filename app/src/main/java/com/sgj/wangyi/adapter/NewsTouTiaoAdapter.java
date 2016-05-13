@@ -1,16 +1,19 @@
 package com.sgj.wangyi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sgj.wangyi.R;
+import com.sgj.wangyi.WebActivity;
 import com.sgj.wangyi.model.NewsTouTiaoModel;
 import com.sgj.wangyi.model.TouTiaoModel;
 
@@ -42,7 +45,7 @@ public class NewsTouTiaoAdapter extends RecyclerView.Adapter<NewsTouTiaoAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        TouTiaoModel.TouTiao model = mDatas.get(position);
+        final TouTiaoModel.TouTiao model = mDatas.get(position);
         Log.e(TAG, model.toString());
         if(model.imgsrc != null){
             Glide.with(mContext).load(model.imgsrc).centerCrop().into(holder.iv_cover);
@@ -58,6 +61,21 @@ public class NewsTouTiaoAdapter extends RecyclerView.Adapter<NewsTouTiaoAdapter.
         if(model.replyCount != null){
             holder.tv_reply_count.setText(model.replyCount + "跟帖");
         }
+
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handClick(model.url, model.url_3w);
+            }
+        });
+    }
+
+    private void handClick(String url, String url_3w) {
+        Intent intent = new Intent(mContext, WebActivity.class);
+        intent.putExtra(WebActivity.URL, url);
+        intent.putExtra(WebActivity.URL_3W, url_3w);
+        mContext.startActivity(intent);
+
     }
 
     @Override
@@ -80,6 +98,8 @@ public class NewsTouTiaoAdapter extends RecyclerView.Adapter<NewsTouTiaoAdapter.
         TextView tv_tname;
         @Bind(R.id.tv_reply_count)
         TextView tv_reply_count;
+        @Bind(R.id.item)
+        RelativeLayout item;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -32,6 +32,8 @@
         </activity>
 
         <activity android:name="com.sgj.wangyi.imagecrop.CropImageActivity" />
+
+        <activity android:name=".WebActivity" />
     </application>
 
 </manifest>

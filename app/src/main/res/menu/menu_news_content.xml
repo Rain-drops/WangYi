@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@drawable/biz_pics_show_menu_share_icon"
+        android:id="@+id/action_settings"
+        android:title="分享"
+        app:showAsAction="withText"/>
+    <item android:id="@+id/action_share"
+        android:icon="@drawable/biz_news_newspage_un_collect_icon"
+        android:title="收藏"/>
+    <item android:id="@+id/action_screenshot"
+        android:icon="@drawable/biz_news_newspage_screenshot_icon"
+        android:title="截屏"/>
+    <item android:id="@+id/action_textsize"
+        android:icon="@drawable/biz_news_newspage_font_icon"
+        android:title="正文字号"/>
+    <item android:id="@+id/action_night"
+        android:icon="@drawable/biz_main_menu_theme"
+        android:title="夜间模式"/>
+</menu>
