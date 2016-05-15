@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.sgj.wangyi.R;
 import com.sgj.wangyi.adapter.NewsTouTiaoAdapter;
+import com.sgj.wangyi.adapter.TouTiaoAdapter;
 import com.sgj.wangyi.dao.AppDao;
 import com.sgj.wangyi.listener.CallBackListener;
 import com.sgj.wangyi.materialrefreshlibrery.MaterialRefreshLayout;
@@ -39,6 +40,7 @@ public class FragmentList extends Fragment {
     MaterialRefreshLayout mMaterialRefreshLayout;
 
     NewsTouTiaoAdapter mAdapter;
+    TouTiaoAdapter mAdapters;
     ArrayList<TouTiaoModel.TouTiao> mDataSet;
 
     public static FragmentList newInsance(){
@@ -88,8 +90,11 @@ public class FragmentList extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(mAdapter != null){
-            mAdapter.updateData(mDataSet);
+//        if(mAdapter != null){
+//            mAdapter.updateData(mDataSet);
+//        }
+        if(mAdapters != null){
+            mAdapters.updateData(mDataSet);
         }
         if(mMaterialRefreshLayout != null){
             mMaterialRefreshLayout.finishRefresh();
@@ -128,12 +133,18 @@ public class FragmentList extends Fragment {
                 if(result != null){
                     ArrayList<TouTiaoModel.TouTiao> list = result.T1348647853363;
                     mDataSet = list;
-                    if(mAdapter == null){
-
-                        mAdapter = new NewsTouTiaoAdapter(getActivity(), list);
-                        recyclerView.setAdapter(mAdapter);
+//                    if(mAdapter == null){
+//
+//                        mAdapter = new NewsTouTiaoAdapter(getActivity(), list);
+//                        recyclerView.setAdapter(mAdapter);
+//                    }else {
+//                        mAdapter.updateData(mDataSet);
+//                    }
+                    if(mAdapters == null) {
+                        mAdapters = new TouTiaoAdapter(getActivity(), list);
+                        recyclerView.setAdapter(mAdapters);
                     }else {
-                        mAdapter.updateData(mDataSet);
+                        mAdapters.updateData(mDataSet);
                     }
                     mMaterialRefreshLayout.finishRefresh();
                 }
