@@ -29,10 +29,12 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.sgj.wangyi.fragment.DetailFragment;
+import com.sgj.wangyi.fragment.FragmentList;
 import com.sgj.wangyi.fragment.FragmentMine;
 import com.sgj.wangyi.fragment.FragmentNews;
 import com.sgj.wangyi.fragment.FragmentTest;
 import com.sgj.wangyi.fragment.FragmentTest2;
+import com.shizhefei.view.indicator.IndicatorViewPager;
 
 import java.util.ArrayList;
 
@@ -200,6 +202,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mTransaction.commit();
 
+    }
+
+    /**
+     * https://github.com/LuckyJayce/ViewPagerIndicator
+     */
+    private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter{
+
+        private String[] tabNames = { "新闻", "阅读", "视听", "话题", "我"};
+        private int[] tabIcons = { R.drawable.biz_navigation_tab_topic_selector, R.drawable.biz_navigation_tab_read_selector,
+                R.drawable.biz_navigation_tab_va_selector,
+                R.drawable.biz_navigation_tab_topic_selector, R.drawable.biz_navigation_tab_pc_selector};
+        private LayoutInflater inflater;
+
+        public MyAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+            inflater = LayoutInflater.from(getApplicationContext());
+        }
+
+        @Override
+        public int getCount() {
+            return tabNames.length;
+        }
+
+        @Override
+        public View getViewForTab(int position, View convertView, ViewGroup container) {
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.navigation_item_layout, container, false);
+            }
+            TextView textView = (TextView) convertView.findViewById(R.id.tv_naviga);
+            textView.setText(tabNames[position]);
+
+            ImageView image = (ImageView) convertView.findViewById(R.id.iv_naviga);
+            image.setImageResource(tabIcons[position]);
+            return convertView;
+        }
+
+        @Override
+        public Fragment getFragmentForPage(int i) {
+            FragmentList mainFragment = FragmentList.newInsance();
+
+            return mainFragment;
+        }
     }
 
 }
