@@ -15,7 +15,7 @@ import com.sgj.wangyi.model.NewsTouTiaoModel;
  */
 public class FragmentTest2 extends Fragment {
 
-    public static FragmentTest2 newInstance(NewsTouTiaoModel model){
+    public static FragmentTest2 newInstance(){
         FragmentTest2 fragmentTest = new FragmentTest2();
         return fragmentTest;
     }

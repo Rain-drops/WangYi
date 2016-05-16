@@ -44,9 +44,9 @@ public class NewsPageAdapter extends FragmentStatePagerAdapter {
         }
 
         if(position%2 == 0){
-            return FragmentTest.newInstance(new NewsTouTiaoModel());
+            return FragmentTest.newInstance();
         }else {
-            return FragmentTest2.newInstance(new NewsTouTiaoModel());
+            return FragmentTest2.newInstance();
         }
 
 //        switch (position){

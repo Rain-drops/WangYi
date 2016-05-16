@@ -81,7 +81,6 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((HeadViewHolder)holder).vp_head.setAdapter(adapter);
             ((HeadViewHolder)holder).tv_title.setText(model2.ads.get(position).title);
 
-
             return;
         }
 
@@ -101,7 +100,9 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if(model.replyCount != null){
                 ((TypeOneViewHolder)holder).tv_reply_count.setText(model.replyCount + "跟帖");
             }
-        }else if (holder instanceof TypeTwoViewHolder){
+            return;
+        }
+        if (holder instanceof TypeTwoViewHolder){
             if(model.imgextra != null){
                 for(int i=0; i<model.imgextra.size(); i++){
                     if(i==0){
@@ -119,6 +120,7 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if(model.title != null){
                 ((TypeTwoViewHolder)holder).tv_title.setText(model.title);
             }
+            return;
         }
     }
 

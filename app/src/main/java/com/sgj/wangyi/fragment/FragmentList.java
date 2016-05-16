@@ -157,5 +157,5 @@ public class FragmentList extends Fragment {
             }
         }, pages +=20);
     }
-    int pages = 20;
+    int pages = 0;
 }

@@ -31,6 +31,8 @@ import android.widget.TextView;
 import com.sgj.wangyi.fragment.DetailFragment;
 import com.sgj.wangyi.fragment.FragmentMine;
 import com.sgj.wangyi.fragment.FragmentNews;
+import com.sgj.wangyi.fragment.FragmentTest;
+import com.sgj.wangyi.fragment.FragmentTest2;
 
 import java.util.ArrayList;
 
@@ -45,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String hideTag;
     public static final String MINE_TAG = "mine_tag";
     public static final String NEWS_TAG = "news_tag";
+    public static final String READ_TAG = "read_tag";
+    public static final String VEDIO_TAG = "vedio_tag";
+    public static final String TOPIC_TAG = "topic_tag";
+
 
 
     FragmentManager mFragmentManager ;
@@ -54,6 +60,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout ll_mine;
     @Bind(R.id.ll_news)
     LinearLayout ll_news;
+    @Bind(R.id.ll_read)
+    LinearLayout ll_read;
+    @Bind(R.id.ll_vedio)
+    LinearLayout ll_vedio;
+    @Bind(R.id.ll_topic)
+    LinearLayout ll_topic;
+
+    @Bind(R.id.iv_mine)
+    ImageView iv_mine;
+    @Bind(R.id.iv_news)
+    ImageView iv_news;
+    @Bind(R.id.iv_read)
+    ImageView iv_read;
+    @Bind(R.id.iv_vedio)
+    ImageView iv_vedio;
+    @Bind(R.id.iv_topic)
+    ImageView iv_topic;
 
 
     @Override
@@ -82,8 +105,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ll_mine.setOnClickListener(this);
         ll_news.setOnClickListener(this);
-
-
+        ll_read.setOnClickListener(this);
+        ll_vedio.setOnClickListener(this);
+        ll_topic.setOnClickListener(this);
 
         switchFragment(FragmentNews.newInstance(), NEWS_TAG);
 
@@ -99,6 +123,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.ll_news:
                 switchFragment(FragmentNews.newInstance(), NEWS_TAG);
+                break;
+            case R.id.ll_read:
+                switchFragment(FragmentTest.newInstance(), READ_TAG);
+                break;
+            case R.id.ll_vedio:
+                switchFragment(FragmentTest2.newInstance(), VEDIO_TAG);
+                break;
+            case R.id.ll_topic:
+                switchFragment(FragmentTest.newInstance(), TOPIC_TAG);
+                break;
         }
     }
 
@@ -120,12 +154,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tagFragment = mFragmentManager.findFragmentByTag(hideTag);
         if(tagFragment != null){
             mTransaction.hide(tagFragment);
+
+            switch (hideTag){
+                case MINE_TAG:
+                    iv_mine.setImageResource(R.drawable.biz_navigation_tab_pc);
+                    break;
+                case NEWS_TAG:
+                    iv_news.setImageResource(R.drawable.biz_navigation_tab_news);
+                    break;
+                case READ_TAG:
+                    iv_read.setImageResource(R.drawable.biz_navigation_tab_read);
+                    break;
+                case VEDIO_TAG:
+                    iv_vedio.setImageResource(R.drawable.biz_navigation_tab_va);
+                    break;
+                case TOPIC_TAG:
+                    iv_topic.setImageResource(R.drawable.biz_navigation_tab_topic);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        switch (tag){
+            case MINE_TAG:
+                iv_mine.setImageResource(R.drawable.biz_navigation_tab_pc_selected);
+                break;
+            case NEWS_TAG:
+                iv_news.setImageResource(R.drawable.biz_navigation_tab_news_selected);
+                break;
+            case READ_TAG:
+                iv_read.setImageResource(R.drawable.biz_navigation_tab_read_selected);
+                break;
+            case VEDIO_TAG:
+                iv_vedio.setImageResource(R.drawable.biz_navigation_tab_va_selected);
+                break;
+            case TOPIC_TAG:
+                iv_topic.setImageResource(R.drawable.biz_navigation_tab_topic_selected);
+                break;
         }
 
         hideTag = tag;
 
+
+
         mTransaction.commit();
 
-
     }
+
 }
