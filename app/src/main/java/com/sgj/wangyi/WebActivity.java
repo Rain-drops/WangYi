@@ -6,12 +6,22 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.lang.reflect.Method;
 
@@ -21,7 +31,7 @@ import butterknife.ButterKnife;
 /**
  * Created by John on 2016/5/13.
  */
-public class WebActivity extends AppCompatActivity {
+public class WebActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "WebActivity";
     private Context mContext;
@@ -36,6 +46,20 @@ public class WebActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
 
+    @Bind(R.id.et_reply)
+    EditText et_reply;
+    String et_reply_str;
+    boolean et_reply_focus = false;
+    @Bind(R.id.tv_reply_count)
+    TextView tv_reply_count;
+    @Bind(R.id.iv_share)
+    ImageView iv_share;
+    @Bind(R.id.tv_send)
+    TextView tv_send;
+
+    @Bind(R.id.view_hide)
+    View view_hide;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +71,9 @@ public class WebActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        view_hide.setOnClickListener(this);
+
         setSupportActionBar(mToolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -65,6 +92,29 @@ public class WebActivity extends AppCompatActivity {
         mWebView.setWebViewClient(new MyWebClient());
 
         mWebView.loadUrl(mUrl_3w);
+
+        et_reply.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    tv_reply_count.setVisibility(View.GONE);
+                    iv_share.setVisibility(View.GONE);
+                    tv_send.setVisibility(View.VISIBLE);
+                    et_reply_focus = true;
+                } else {
+                    if(!et_reply.getText().toString().isEmpty()){
+                    }else {
+
+                        tv_reply_count.setVisibility(View.VISIBLE);
+                        iv_share.setVisibility(View.VISIBLE);
+                        tv_send.setVisibility(View.GONE);
+                    }
+                    et_reply_focus = false;
+                }
+            }
+        });
+
+
 
     }
 
@@ -122,6 +172,39 @@ public class WebActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.e(TAG, view_hide.isShown()+ "");
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(et_reply_focus){
+                et_reply.clearFocus();
+                return true;
+            }
+
+
+        }
+
+        return super.onKeyDown(keyCode, event);
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(null != this.getCurrentFocus()){
+            /**
+             * 点击空白位置 隐藏软键盘
+             */
+            InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            return mInputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.onTouchEvent(event);
     }
 
     private class MyChromeClient extends WebChromeClient{

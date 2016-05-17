@@ -14,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,13 +40,20 @@ public class FragmentNews extends Fragment implements View.OnClickListener{
 
     private ArrayList<Fragment> mFragments;
 
+    LinearLayout frameLayout;
+
     private HorizontalScrollView mHorizontalScrollView ;
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private ImageView iv_region;
 
     private NewsPageAdapter mPagerAdater;
 
+
+    private Animation animEnter = null;
+    private Animation animExit = null;
+    private boolean isShow = false;
 
     public static FragmentNews newInstance(){
         FragmentNews fragmentNews = new FragmentNews();
@@ -54,6 +63,8 @@ public class FragmentNews extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        animEnter = AnimationUtils.loadAnimation(getActivity(), R.anim.vertical_enter);
+        animExit = AnimationUtils.loadAnimation(getActivity(), R.anim.vertical_exit);
     }
 
     @Nullable
@@ -67,8 +78,10 @@ public class FragmentNews extends Fragment implements View.OnClickListener{
     private void init(View view) {
         mViewPager = (ViewPager) view.findViewById(R.id.vp_news);
         mTabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        iv_region = (ImageView) view.findViewById(R.id.iv_region);
+        iv_region.setOnClickListener(this);
 
-
+        frameLayout = (LinearLayout) view.findViewById(R.id.fl_region);
     }
 
     @Override
@@ -106,5 +119,27 @@ public class FragmentNews extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()){
+            case R.id.iv_region:
+                if (!isShow) {
+                    performAnimateOn();
+                } else {
+                    performAnimateOff();
+                }
+                break;
+        }
+    }
+    private void performAnimateOn() {
+        frameLayout.setAnimation(animEnter);
+        animEnter.start();
+        frameLayout.setVisibility(View.VISIBLE);
+        isShow = true;
+    }
+
+    private void performAnimateOff() {
+        frameLayout.setAnimation(animExit);
+        animExit.start();
+        frameLayout.setVisibility(View.GONE);
+        isShow = false;
     }
 }

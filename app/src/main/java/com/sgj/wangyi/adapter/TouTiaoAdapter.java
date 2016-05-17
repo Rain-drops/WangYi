@@ -1,6 +1,7 @@
 package com.sgj.wangyi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sgj.wangyi.R;
+import com.sgj.wangyi.WebActivity;
 import com.sgj.wangyi.model.TouTiaoModel;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ import butterknife.ButterKnife;
 /**
  * Created by John on 2016/5/11.
  */
-public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
 
 
     private static final String TAG = "TouTiaoAdapter";
@@ -70,7 +73,7 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     HeadViewHolder viewHolder1;
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        TouTiaoModel.TouTiao model = mDatas.get(position);
+        final TouTiaoModel.TouTiao model = mDatas.get(position);
         Log.e(TAG, model.toString());
 
         if(holder instanceof HeadViewHolder){
@@ -100,6 +103,15 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if(model.replyCount != null){
                 ((TypeOneViewHolder)holder).tv_reply_count.setText(model.replyCount + "跟帖");
             }
+            ((TypeOneViewHolder)holder).item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(WebActivity.URL, model.url);
+                    intent.putExtra(WebActivity.URL_3W, model.url_3w);
+                    mContext.startActivity(intent);
+                }
+            });
             return;
         }
         if (holder instanceof TypeTwoViewHolder){
@@ -146,6 +158,11 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
     public class TypeOneViewHolder extends RecyclerView.ViewHolder{
 
         @Bind(R.id.iv_cover)
@@ -156,10 +173,13 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView tv_tname;
         @Bind(R.id.tv_reply_count)
         TextView tv_reply_count;
+        @Bind(R.id.item)
+        RelativeLayout item;
 
         public TypeOneViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
         }
     }
 
