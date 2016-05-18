@@ -12,12 +12,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:horizontalSpacing="10dp"
-            android:verticalSpacing="8dp"/>
+            android:verticalSpacing="8dp"
+            android:background="@color/material_grey_50"/>
+
         <GridView
             android:id="@+id/gv_gview2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:horizontalSpacing="10dp"
-            android:verticalSpacing="8dp"/>
+            android:verticalSpacing="8dp"
+            android:background="@color/material_grey_100"/>
     </LinearLayout>
 </ScrollView>

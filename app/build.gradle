@@ -35,4 +35,5 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.10.0'
     compile project(':imagecrop')
     compile files('libs/ViewpagerIndicator_1.0.2.jar')
+    compile 'com.mcxiaoke.volley:library:1.0.19'
 }

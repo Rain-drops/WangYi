@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.sgj.wangyi.R;
 import com.sgj.wangyi.WebActivity;
 import com.sgj.wangyi.model.TouTiaoModel;
+import com.sgj.wangyi.util.NeteaseURLParse;
+import com.sgj.wangyi.view.MyRecyclerView;
 
 import java.util.ArrayList;
 
@@ -115,6 +117,11 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return;
         }
         if (holder instanceof TypeTwoViewHolder){
+
+//            MyRecyclerView hold = ((TypeTwoViewHolder)holder).myRecyclerView;
+//
+//            String jsonString = NeteaseURLParse.parseJSONUrlOFPhotoset(model.skipID);
+
             if(model.imgextra != null){
                 for(int i=0; i<model.imgextra.size(); i++){
                     if(i==0){
@@ -185,12 +192,17 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class TypeTwoViewHolder extends RecyclerView.ViewHolder{
 
+//        @Bind(R.id.rv_subrecycleview)
+//        MyRecyclerView myRecyclerView;
+
+
         @Bind(R.id.iv_photo_one)
         ImageView iv_photo_one;
         @Bind(R.id.iv_photo_two)
         ImageView iv_photo_two;
         @Bind(R.id.iv_photo_three)
         ImageView iv_photo_three;
+
         @Bind(R.id.tv_title)
         TextView tv_title;
 
