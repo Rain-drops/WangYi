@@ -14,12 +14,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -41,7 +44,9 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, FragmentNews.RegionClickListener {
+
+    private static final String TAG = "MainActivity";
 
     //定义数组来存放Fragment界面
     private Class mFragmentArray[] = {FragmentNews.class,FragmentNews.class,FragmentNews.class,FragmentNews.class,FragmentNews.class};
@@ -80,11 +85,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.iv_topic)
     ImageView iv_topic;
 
+    @Bind(R.id.navigation)
+    View include;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // ((ViewStub) findViewById(R.id.navigation)).setVisibility(View.VISIBLE); or
+        // include = ((ViewStub) findViewById(R.id.navigation)).inflate();
+
         ButterKnife.bind(this);
         init();
     }
@@ -95,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fragment f = mFragmentManager.findFragmentByTag(MINE_TAG);
         /*然后在碎片中调用重写的onActivityResult方法*/
         f.onActivityResult(requestCode, resultCode, data);
+
+
     }
 
     @Override
@@ -110,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ll_read.setOnClickListener(this);
         ll_vedio.setOnClickListener(this);
         ll_topic.setOnClickListener(this);
+
+        animEnter = AnimationUtils.loadAnimation(this, R.anim.navigation_enter);
+        animExit = AnimationUtils.loadAnimation(this, R.anim.navigation_exit);
 
         switchFragment(FragmentNews.newInstance(), NEWS_TAG);
 
@@ -202,6 +219,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mTransaction.commit();
 
+    }
+    private Animation animEnter = null;
+    private Animation animExit = null;
+    @Override
+    public void regionClick(boolean isShow) {
+        if(isShow){
+            Log.e(TAG, "" + (animExit == null));
+            include.setAnimation(animExit);
+            animExit.start();
+            include.setVisibility(View.GONE);
+        }else {
+            Log.e(TAG, "" + (animEnter == null));
+            include.setAnimation(animEnter);
+            animEnter.start();
+            include.setVisibility(View.VISIBLE);
+        }
     }
 
     /**

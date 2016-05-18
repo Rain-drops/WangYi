@@ -1,5 +1,7 @@
 package com.sgj.wangyi.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -67,6 +69,16 @@ public class FragmentNews extends Fragment implements View.OnClickListener{
         animExit = AnimationUtils.loadAnimation(getActivity(), R.anim.vertical_exit);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            regionClickListener = (RegionClickListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + " must implement IndexListener");
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -123,9 +135,11 @@ public class FragmentNews extends Fragment implements View.OnClickListener{
             case R.id.iv_region:
                 if (!isShow) {
                     performAnimateOn();
+
                 } else {
                     performAnimateOff();
                 }
+                regionClickListener.regionClick(isShow);
                 break;
         }
     }
@@ -141,5 +155,13 @@ public class FragmentNews extends Fragment implements View.OnClickListener{
         animExit.start();
         frameLayout.setVisibility(View.GONE);
         isShow = false;
+    }
+
+    RegionClickListener regionClickListener = null;
+    public interface RegionClickListener {
+        void regionClick(boolean isShow);
+    }
+    public void setRegionClickListener(RegionClickListener listener){
+        regionClickListener = listener;
     }
 }

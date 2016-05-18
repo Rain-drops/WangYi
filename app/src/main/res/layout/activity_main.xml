@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"></FrameLayout>
 
+    <include android:id="@+id/navigation" layout="@layout/navigation_layout" />
 
-    <include layout="@layout/navigation_layout"/>
 
 </LinearLayout>
