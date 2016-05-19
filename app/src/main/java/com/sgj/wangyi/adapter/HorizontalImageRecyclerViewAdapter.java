@@ -14,6 +14,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.sgj.wangyi.BaseApplication;
 import com.sgj.wangyi.R;
 import com.sgj.wangyi.model.imageextra.PhotoSet;
+import com.sgj.wangyi.vollley.MySingleton;
 
 /**
  * Created by John on 2016/5/18.
@@ -84,7 +85,7 @@ public class HorizontalImageRecyclerViewAdapter extends RecyclerView.Adapter<Rec
 
     @Override
     public int getItemCount() {
-        return (photoSet == null || photoSet.getPhotos() == null) ? 3 : photoSet.getPhotos().size();
+        return 3;//(photoSet == null || photoSet.getPhotos() == null) ? 3 : photoSet.getPhotos().size();
     }
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder{
@@ -98,12 +99,12 @@ public class HorizontalImageRecyclerViewAdapter extends RecyclerView.Adapter<Rec
             index = i;
             isMoved = false;
             //第一张图不要边距
-            if (index == 0) {
-                RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.MATCH_PARENT);
-                RelativeLayout rv = (RelativeLayout) view.findViewById(R.id.rlContainer);
-                rl.setMargins(0, 0, 0, 0);
-                rv.setLayoutParams(rl);
-            }
+//            if (index == 0) {
+//                RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+//                RelativeLayout rv = (RelativeLayout) view.findViewById(R.id.rlContainer);
+//                rl.setMargins(0, 0, 0, 0);
+//                rv.setLayoutParams(rl);
+//            }
             imageView = (NetworkImageView) view.findViewById(R.id.iv_sub_image);
             imageView.setLayoutParams(new RelativeLayout.LayoutParams(weight, height));
             imageView.setOnTouchListener(new View.OnTouchListener() {
@@ -130,8 +131,8 @@ public class HorizontalImageRecyclerViewAdapter extends RecyclerView.Adapter<Rec
     private void setNetworkImageView(NetworkImageView networkImageView, String url) {
         networkImageView.setDefaultImageResId(defaultImage);
         networkImageView.setErrorImageResId(defaultImage);
-//        networkImageView.setImageUrl(url,
-//                MySingleton.getInstance(mContext).getImageLoader());
+        networkImageView.setImageUrl(url,
+                MySingleton.getInstance(mContext).getImageLoader());
     }
 
 }

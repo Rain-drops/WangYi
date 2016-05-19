@@ -2,7 +2,9 @@ package com.sgj.wangyi.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +14,21 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.sgj.wangyi.R;
 import com.sgj.wangyi.WebActivity;
+import com.sgj.wangyi.config.Global;
+import com.sgj.wangyi.factory.RequestSingletonFactory;
 import com.sgj.wangyi.model.TouTiaoModel;
+import com.sgj.wangyi.model.imageextra.PhotoSet;
 import com.sgj.wangyi.util.NeteaseURLParse;
 import com.sgj.wangyi.view.MyRecyclerView;
+import com.sgj.wangyi.vollley.MySingleton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -118,11 +129,20 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         if (holder instanceof TypeTwoViewHolder){
 
-//            MyRecyclerView hold = ((TypeTwoViewHolder)holder).myRecyclerView;
-//
-//            String jsonString = NeteaseURLParse.parseJSONUrlOFPhotoset(model.skipID);
+            MyRecyclerView hold = ((TypeTwoViewHolder)holder).myRecyclerView;
+            String jsonString = NeteaseURLParse.parseJSONUrlOFPhotoset(model.skipID);
+            if (hold.getAdapter() != null && hold.getAdapter() instanceof HorizontalImageRecyclerViewAdapter) {
+                //单纯设置数据
+                getPhotosetImageJsonURl((HorizontalImageRecyclerViewAdapter) hold.getAdapter(), jsonString);
+            } else {
+                //设置水平适配器
+                hold.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+                HorizontalImageRecyclerViewAdapter horizontalImageRecyclerViewAdapter = new HorizontalImageRecyclerViewAdapter(mContext, null, hold);
+                hold.setAdapter(horizontalImageRecyclerViewAdapter);
+                getPhotosetImageJsonURl(horizontalImageRecyclerViewAdapter, jsonString);
+            }
 
-            if(model.imgextra != null){
+            /*if(model.imgextra != null){
                 for(int i=0; i<model.imgextra.size(); i++){
                     if(i==0){
                         Glide.with(mContext).load(model.imgextra.get(i).imgsrc).centerCrop().into(((TypeTwoViewHolder) holder).iv_photo_one);
@@ -135,7 +155,7 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
             if(model.imgsrc != null){
                 Glide.with(mContext).load(model.imgsrc).centerCrop().into(((TypeTwoViewHolder)holder).iv_photo_three);
-            }
+            }*/
             if(model.title != null){
                 ((TypeTwoViewHolder)holder).tv_title.setText(model.title);
             }
@@ -192,8 +212,8 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class TypeTwoViewHolder extends RecyclerView.ViewHolder{
 
-//        @Bind(R.id.rv_subrecycleview)
-//        MyRecyclerView myRecyclerView;
+        @Bind(R.id.rv_subrecycleview)
+        MyRecyclerView myRecyclerView;
 
 
         @Bind(R.id.iv_photo_one)
@@ -256,5 +276,26 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         }
 
+    }
+
+    private void getPhotosetImageJsonURl(final HorizontalImageRecyclerViewAdapter adapter, final String url) {
+        MySingleton.getInstance(mContext).getRequestQueue().add(
+                RequestSingletonFactory.getInstance().getGETStringRequest(mContext, url,
+                        new Response.Listener() {
+                            @Override
+                            public void onResponse(Object response) {
+                                JSONObject obj;
+                                try {
+                                    obj = new JSONObject(response.toString());
+                                    PhotoSet photoSet = new Gson().fromJson(obj.toString(), Global.NewsImageItemType);
+                                    Global.extraImageHashMap.put(url, photoSet);
+                                    adapter.setPhotoSet(photoSet);
+//                            System.out.println(photoSet);
+                                    adapter.notifyDataSetChanged();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }));
     }
 }

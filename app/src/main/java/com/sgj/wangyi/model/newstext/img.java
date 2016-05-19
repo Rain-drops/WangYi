@@ -1,7 +1,7 @@
 package com.sgj.wangyi.model.newstext;
 
 /**
- * Created by netease on 16/2/19.
+ * Created by John on 2016/5/19.
  */
 public class Img {
     private String ref;
