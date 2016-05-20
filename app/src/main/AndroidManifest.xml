@@ -34,6 +34,7 @@
         <activity android:name="com.sgj.wangyi.imagecrop.CropImageActivity" />
 
         <activity android:name=".WebActivity" />
+        <activity android:name=".PhotoSetActivity" />
     </application>
 
 </manifest>

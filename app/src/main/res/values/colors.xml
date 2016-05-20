@@ -11,4 +11,6 @@
     <color name="material_grey_150">#fff0f0f0</color>
     <color name="material_grey_200">#ffeaeaea</color>
     <color name="material_grey_250">#ffe5e5e5</color>
+    <color name="material_grey_400">#ffd5d5d5</color>
+    <color name="material_grey_500">#ffcacaca</color>
 </resources>

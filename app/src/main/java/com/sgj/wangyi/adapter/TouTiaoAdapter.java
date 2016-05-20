@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.sgj.wangyi.PhotoSetActivity;
 import com.sgj.wangyi.R;
 import com.sgj.wangyi.WebActivity;
 import com.sgj.wangyi.config.Global;
@@ -141,21 +142,6 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 hold.setAdapter(horizontalImageRecyclerViewAdapter);
                 getPhotosetImageJsonURl(horizontalImageRecyclerViewAdapter, jsonString);
             }
-
-            /*if(model.imgextra != null){
-                for(int i=0; i<model.imgextra.size(); i++){
-                    if(i==0){
-                        Glide.with(mContext).load(model.imgextra.get(i).imgsrc).centerCrop().into(((TypeTwoViewHolder) holder).iv_photo_one);
-                    }
-                    if(i==1){
-                        Glide.with(mContext).load(model.imgextra.get(i).imgsrc).centerCrop().into(((TypeTwoViewHolder) holder).iv_photo_two);
-                    }
-                }
-
-            }
-            if(model.imgsrc != null){
-                Glide.with(mContext).load(model.imgsrc).centerCrop().into(((TypeTwoViewHolder)holder).iv_photo_three);
-            }*/
             if(model.title != null){
                 ((TypeTwoViewHolder)holder).tv_title.setText(model.title);
             }
@@ -216,12 +202,12 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         MyRecyclerView myRecyclerView;
 
 
-        @Bind(R.id.iv_photo_one)
-        ImageView iv_photo_one;
-        @Bind(R.id.iv_photo_two)
-        ImageView iv_photo_two;
-        @Bind(R.id.iv_photo_three)
-        ImageView iv_photo_three;
+//        @Bind(R.id.iv_photo_one)
+//        ImageView iv_photo_one;
+//        @Bind(R.id.iv_photo_two)
+//        ImageView iv_photo_two;
+//        @Bind(R.id.iv_photo_three)
+//        ImageView iv_photo_three;
 
         @Bind(R.id.tv_title)
         TextView tv_title;
@@ -231,9 +217,19 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @Bind(R.id.tv_reply_count)
         TextView tv_reply_count;
 
+        @Bind(R.id.rl_photoset)
+        View rl_photoset;
+
         public TypeTwoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            rl_photoset.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, PhotoSetActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 
