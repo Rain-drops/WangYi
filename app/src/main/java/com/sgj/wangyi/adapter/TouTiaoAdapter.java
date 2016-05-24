@@ -275,6 +275,7 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private void getPhotosetImageJsonURl(final HorizontalImageRecyclerViewAdapter adapter, final String url) {
+        Log.e(TAG, "url = " + url);
         MySingleton.getInstance(mContext).getRequestQueue().add(
                 RequestSingletonFactory.getInstance().getGETStringRequest(mContext, url,
                         new Response.Listener() {

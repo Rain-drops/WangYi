@@ -1,7 +1,7 @@
 package com.sgj.wangyi.model.newstext;
 
 /**
- * Created by John on 2016/5/19.
+ * Created by Administrator on 2016/5/21.
  */
 public class Img {
     private String ref;
@@ -46,4 +46,5 @@ public class Img {
                 ", src='" + src + '\'' +
                 '}';
     }
+
 }

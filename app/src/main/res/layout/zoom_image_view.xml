@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sgj.wangyi.view.MyImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/zoom_image_view"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+</com.sgj.wangyi.view.MyImageView>
