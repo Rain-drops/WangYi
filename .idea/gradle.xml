@@ -16,15 +16,6 @@
             <option value="$PROJECT_DIR$/materialrefreshlibrery" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/http" />
-            <option value="$PROJECT_DIR$/imagecrop" />
-            <option value="$PROJECT_DIR$/materialrefreshlibrery" />
-          </set>
-        </option>
       </GradleProjectSettings>
     </option>
   </component>

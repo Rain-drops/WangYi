@@ -22,6 +22,7 @@ import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Method;
 
@@ -174,6 +175,24 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.action_share:
+                Toast.makeText(mContext, "分享", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_collect:
+                Toast.makeText(mContext, "收藏", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_screenshot:
+                Toast.makeText(mContext, "截屏", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_textsize:
+                Toast.makeText(mContext, "字体大小", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_night:
+                Toast.makeText(mContext, "夜间模式", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

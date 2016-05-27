@@ -1,21 +1,29 @@
 package com.sgj.wangyi.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sgj.wangyi.CropActivity;
 import com.sgj.wangyi.R;
 import com.sgj.wangyi.imagecrop.Crop;
 
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,6 +32,8 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/5/11.
  */
 public class FragmentMine extends Fragment implements View.OnClickListener{
+
+    public static final String TAG = "FragmentMine";
 
     @Bind(R.id.sdv_avatar)
     SimpleDraweeView sdv_avatar;
@@ -88,8 +98,27 @@ public class FragmentMine extends Fragment implements View.OnClickListener{
 
             if(null == result.getExtras().getString("type")){
 
-                Uri uri = Uri.parse(result.getExtras().getString("source"));
-                sdv_avatar.setImageURI(uri);
+                final Uri uri = Uri.parse(result.getExtras().getString("source"));
+                Log.e(TAG, uri.toString()); // file:///data/data/com.sgj.wangyi/cache/cropped
+
+//                sdv_avatar.setImageURI(uri);
+
+                DraweeController controller = Fresco.newDraweeControllerBuilder()
+                        .setUri(uri)
+                        .setTapToRetryEnabled(true)
+                        .setOldController(sdv_avatar.getController())
+                        .build();
+
+                sdv_avatar.setController(controller);
+
+
+//                try {
+//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+//                    sdv_avatar.setImageBitmap(bitmap); //
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+
             }else {
                 Toast.makeText(getActivity(), Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -98,5 +127,6 @@ public class FragmentMine extends Fragment implements View.OnClickListener{
 
 
     }
+    int index = 0;
 
 }

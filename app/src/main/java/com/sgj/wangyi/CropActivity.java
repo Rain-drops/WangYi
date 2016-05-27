@@ -34,8 +34,10 @@ public class CropActivity extends Activity {
         beginCrop(source);
     }
 
+    int index = 0;
     private void beginCrop(Uri source) {
-        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+        Uri destination;
+        destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
         Crop.of(source, destination).asSquare().start(this);
     }
 

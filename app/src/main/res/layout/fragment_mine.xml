@@ -18,4 +18,5 @@
              app:backgroundImage="@drawable/icon_toutiao"
              app:roundAsCircle="true"/>
     </RelativeLayout>
+
 </LinearLayout>

@@ -4,10 +4,10 @@
 
     <item
         android:icon="@drawable/biz_pics_show_menu_share_icon"
-        android:id="@+id/action_settings"
+        android:id="@+id/action_share"
         android:title="分享"
         app:showAsAction="withText"/>
-    <item android:id="@+id/action_share"
+    <item android:id="@+id/action_collect"
         android:icon="@drawable/biz_news_newspage_un_collect_icon"
         android:title="收藏"/>
     <item android:id="@+id/action_screenshot"

@@ -52,13 +52,14 @@ public class PhotoSetActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.night_base_action_bar_back));
 
 //        Intent intent = getIntent();
 //        PhotoSet photoSet = (PhotoSet) intent.getSerializableExtra("photoSet");
         PhotoSet photoSet = new PhotoSet();
         ArrayList<photos> arrayList = new ArrayList<>();
         photos photo = new photos();
-        photo.setTimgurl("http://img4.cache.netease.com/photo/0001/2016-05-04/c_BM75ETHD00AP0001.jpg");
+        photo.setTimgurl("http://img4.cache.netease.com/photo/0001/2016-05-04/s_BM75ETHD00AP0001.jpg");
         photos photo1 = new photos();
         photo1.setTimgurl("http://img3.cache.netease.com/photo/0001/2016-05-04/t_BM75ETHD00AP0001.jpg");
         photos photo2 = new photos();
@@ -136,7 +137,7 @@ public class PhotoSetActivity extends BaseActivity {
         public Object instantiateItem(ViewGroup container, int position) {
             imageView = mImageViews.get(position);
             Glide.with(mContext).load(mDatas.getPhotos()
-                    .get(position).getTimgurl()).centerCrop().into(imageView);
+                    .get(position).getTimgurl()).fitCenter().into(imageView);
             ((ViewPager)container).addView(imageView);
             return imageView;
         }
