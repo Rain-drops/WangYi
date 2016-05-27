@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 /**
  * 这是一个下拉刷新控制;
  * 比SwipeRefreshLayout更漂亮和强大的下拉刷新控件
+ * 摘自  * https://github.com/android-cjj/Android-MaterialRefreshLayout
  */
 public class MaterialRefreshLayout extends FrameLayout {
 

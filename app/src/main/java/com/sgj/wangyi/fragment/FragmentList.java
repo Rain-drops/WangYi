@@ -155,7 +155,7 @@ public class FragmentList extends Fragment {
                 super.onStringResult(result);
 
             }
-        }, pages +=20);
+        }, pages);
     }
-    int pages = 0;
+    int pages = 20;
 }

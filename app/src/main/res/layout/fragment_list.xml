@@ -5,11 +5,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:isLoadMore="true"
     app:overlay="true"
-    app:progress_colors="@array/material_colors"
-    app:wave_color="#00ffffff"
     app:wave_show="true"
+    app:wave_color="#90ffffff"
+    app:progress_colors="@array/material_colors"
+    app:wave_height_type="higher"
     >
 
     <android.support.v7.widget.RecyclerView

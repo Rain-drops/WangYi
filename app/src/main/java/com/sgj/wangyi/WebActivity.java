@@ -73,11 +73,15 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
     private void init() {
 
         view_hide.setOnClickListener(this);
-
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.navigationTitle2));
         setSupportActionBar(mToolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        CharSequence sequence = "网易新闻";
+//        getSupportActionBar().setTitle(sequence);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.night_base_action_bar_back));
+
+
+//        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.night_base_action_bar_back));
 
 
         Intent intent = getIntent();
